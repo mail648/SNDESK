@@ -2454,7 +2454,24 @@ pub fn rustdesk_interval(i: Interval) -> ThrottledInterval {
     ThrottledInterval::new(i)
 }
 
+fn apply_sndesk_branding() {
+    *config::APP_NAME.write().unwrap() = "SNDESK".to_owned();
+    let server = option_env!("RENDEZVOUS_SERVER")
+        .filter(|s| !s.is_empty())
+        .unwrap_or("125.253.92.98");
+    let mut defaults = config::DEFAULT_SETTINGS.write().unwrap();
+    defaults.insert(
+        keys::OPTION_CUSTOM_RENDEZVOUS_SERVER.to_owned(),
+        server.to_owned(),
+    );
+    defaults.insert(keys::OPTION_RELAY_SERVER.to_owned(), server.to_owned());
+    if let Some(key) = option_env!("RS_PUB_KEY").filter(|s| !s.is_empty()) {
+        defaults.insert(keys::OPTION_KEY.to_owned(), key.to_owned());
+    }
+}
+
 pub fn load_custom_client() {
+    apply_sndesk_branding();
     #[cfg(debug_assertions)]
     if let Ok(data) = std::fs::read_to_string("./custom.txt") {
         read_custom_client(data.trim());
@@ -2553,6 +2570,7 @@ pub fn get_dst_align_rgba() -> usize {
 }
 
 pub fn read_custom_client(config: &str) {
+    apply_sndesk_branding();
     let Ok(data) = decode64(config) else {
         log::error!("Failed to decode custom client config");
         return;
