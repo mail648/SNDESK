@@ -2465,9 +2465,10 @@ fn apply_sndesk_branding() {
         server.to_owned(),
     );
     defaults.insert(keys::OPTION_RELAY_SERVER.to_owned(), server.to_owned());
-    if let Some(key) = option_env!("RS_PUB_KEY").filter(|s| !s.is_empty()) {
-        defaults.insert(keys::OPTION_KEY.to_owned(), key.to_owned());
-    }
+    defaults.insert(
+        keys::OPTION_KEY.to_owned(),
+        "PJRFHPG7rx6Ca4wGQPo8FpEWEDwtwLKZRzpN9yTiqzw=".to_owned(),
+    );
 }
 
 pub fn load_custom_client() {
