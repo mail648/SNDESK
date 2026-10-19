@@ -2465,7 +2465,7 @@ fn apply_sndesk_branding() {
     defaults.insert(keys::OPTION_RELAY_SERVER.to_owned(), server.to_owned());
     defaults.insert(
         keys::OPTION_KEY.to_owned(),
-        "PJRFHPG7rx6Ca4wGQPo8FpEWEDwtwLKZRzpN9yTiqzw=".to_owned(),
+        "x7jYlEJi3grTITdKHXqMEC2EjGHft9I9RH4uZscfQuk=".to_owned(),
     );
 }
 
