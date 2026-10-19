@@ -70,6 +70,19 @@ class _DesktopHomePageState extends State<DesktopHomePage>
     ));
   }
 
+  Widget buildSninsightLink() {
+    return InkWell(
+      onTap: () => launchUrl(Uri.parse('https://sninsight.com')),
+      child: const Text(
+        'sninsight.com',
+        style: TextStyle(
+            color: Color(0xFF1A7FC4),
+            fontSize: 12,
+            decoration: TextDecoration.underline),
+      ),
+    ).marginOnly(top: 4);
+  }
+
   Widget _buildBlock({required Widget child}) {
     return buildRemoteBlock(
         block: _block, mask: true, use: canBeBlocked, child: child);
@@ -89,6 +102,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
         alignment: Alignment.center,
         child: loadLogo(),
       ),
+      buildSninsightLink(),
       buildTip(context),
       if (!isOutgoingOnly) buildIDBoard(context),
       if (!isOutgoingOnly) buildPasswordBoard(context),

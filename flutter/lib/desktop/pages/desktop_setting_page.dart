@@ -2610,6 +2610,7 @@ class _AboutState extends State<_About> {
                     translate('Website'),
                     style: linkStyle,
                   ).marginSymmetric(vertical: 4.0)),
+              _sninsightCompanyCard(linkStyle),
               Container(
                 decoration: const BoxDecoration(color: Color(0xFF2c8cff)),
                 padding:
@@ -2643,6 +2644,50 @@ class _AboutState extends State<_About> {
       );
     });
   }
+}
+
+Widget _sninsightCompanyCard(TextStyle linkStyle) {
+  Widget link(String text, String url) => InkWell(
+      onTap: () => launchUrlString(url),
+      child: Text(text, style: linkStyle).marginOnly(right: 16));
+  return Container(
+    decoration: BoxDecoration(
+        border: Border.all(color: const Color(0xFF1A7FC4)),
+        borderRadius: BorderRadius.circular(8)),
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('SNDESK by SN INSIGHT',
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF1A7FC4))),
+        const Text(
+                'One AI core. Multiple enterprise products. From information to action.',
+                style: TextStyle(fontStyle: FontStyle.italic))
+            .marginSymmetric(vertical: 6.0),
+        const Text(
+            'SN INSIGHT builds an AI operating platform for business, finance, '
+            'documents and construction. It connects business records, documents '
+            'and workflows so teams can ask questions, check the records behind '
+            'the answers and complete approved actions, with permissions, '
+            'approvals and audit history built in. SNDESK is its secure remote '
+            'desktop app.'),
+        const Text(
+                'Products: Business AI, Design & Build AI, Real Estate AI OS, '
+                'Construction AI ERP, Alice Finance AI, SN Workforce, '
+                'Tally Bridge, Document AI')
+            .marginSymmetric(vertical: 6.0),
+        Wrap(children: [
+          link('sninsight.com', 'https://sninsight.com'),
+          link('About us', 'https://sninsight.com/about'),
+          link('Contact', 'https://sninsight.com/contact'),
+          link('Support', 'https://sninsight.com/Support/RaiseTicket.aspx'),
+        ]),
+      ],
+    ),
+  ).marginSymmetric(vertical: 8.0);
 }
 
 //#endregion
