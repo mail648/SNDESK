@@ -2623,7 +2623,7 @@ class _AboutState extends State<_About> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Copyright © ${DateTime.now().toString().substring(0, 4)} Purslane Tech Pte. Ltd.\n$license',
+                            'Copyright © ${DateTime.now().toString().substring(0, 4)} Alicesoft Private Limited. SN INSIGHT is a brand of Alicesoft Private Limited.\nBased on RustDesk, Copyright © Purslane Tech Pte. Ltd.\n$license',
                             style: const TextStyle(color: Colors.white),
                           ),
                           Text(
@@ -2670,6 +2670,8 @@ Widget _sninsightCompanyCard(TextStyle linkStyle) {
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.white)),
+        const Text('SN INSIGHT is a brand of Alicesoft Private Limited.')
+            .marginOnly(top: 4.0),
         const Text(
                 'One AI core. Multiple enterprise products. From information to action.',
                 style: TextStyle(fontStyle: FontStyle.italic))
@@ -2688,6 +2690,7 @@ Widget _sninsightCompanyCard(TextStyle linkStyle) {
             .marginSymmetric(vertical: 6.0),
         Wrap(children: [
           link('sninsight.com', 'https://sninsight.com'),
+          link('alicesoft.co.in', 'https://alicesoft.co.in'),
           link('About us', 'https://sninsight.com/about'),
           link('Contact', 'https://sninsight.com/contact'),
           link('Support', 'https://sninsight.com/Support/RaiseTicket.aspx'),
