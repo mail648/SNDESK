@@ -545,6 +545,11 @@ jobs:
           for f in ./SignOutput/rustdesk-*.msi ./SignOutput/rustdesk-*.exe; do
             [ -e "$f" ] && mv "$f" "./SignOutput/sndesk-${f##*/rustdesk-}"
           done
+          suffix=$([ "${{ matrix.job.arch }}" = "x86_64" ] && echo "" || echo "-arm64")
+          for ext in exe msi; do
+            f=./SignOutput/sndesk-${{ env.VERSION }}-${{ matrix.job.arch }}.$ext
+            [ -e "$f" ] && mv "$f" "./SignOutput/sndesk$suffix.$ext"
+          done
           ls ./SignOutput
 
       - name: Publish Release
@@ -554,8 +559,8 @@ jobs:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
-            ./SignOutput/sndesk-*.msi
-            ./SignOutput/sndesk-*.exe
+            ./SignOutput/sndesk*.msi
+            ./SignOutput/sndesk*.exe
 
   # The fallback for the flutter version, we use Sciter for 32bit Windows.
   build-for-windows-sciter:
