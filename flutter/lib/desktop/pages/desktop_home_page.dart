@@ -144,7 +144,16 @@ class _DesktopHomePageState extends State<DesktopHomePage>
       value: gFFI.serverModel,
       child: Container(
         width: isIncomingOnly ? 280.0 : 200.0,
-        color: Theme.of(context).colorScheme.background,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
+          gradient: Theme.of(context).brightness == Brightness.light
+              ? const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xFFE3F0FF), Color(0xFFE0F7F2)],
+                )
+              : null,
+        ),
         child: Stack(
           children: [
             Column(
@@ -626,8 +635,9 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
                 colors: [
-                  Color.fromARGB(255, 15, 76, 156),
-                  Color.fromARGB(255, 35, 181, 232),
+                  Color.fromARGB(255, 37, 99, 235),
+                  Color.fromARGB(255, 6, 182, 212),
+                  Color.fromARGB(255, 16, 185, 129),
                 ],
               )),
               padding: EdgeInsets.all(20),

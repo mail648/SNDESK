@@ -2612,7 +2612,7 @@ class _AboutState extends State<_About> {
                   ).marginSymmetric(vertical: 4.0)),
               _sninsightCompanyCard(linkStyle),
               Container(
-                decoration: const BoxDecoration(color: Color(0xFF2c8cff)),
+                decoration: const BoxDecoration(color: Color(0xFF1A7FC4)),
                 padding:
                     const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
                 child: SelectionArea(
@@ -2650,19 +2650,26 @@ Widget _sninsightCompanyCard(TextStyle linkStyle) {
   Widget link(String text, String url) => InkWell(
       onTap: () => launchUrlString(url),
       child: Text(text, style: linkStyle).marginOnly(right: 16));
+  linkStyle = linkStyle.copyWith(color: Colors.white);
   return Container(
     decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xFF1A7FC4)),
-        borderRadius: BorderRadius.circular(8)),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF2563EB), Color(0xFF06B6D4), Color(0xFF10B981)],
+        ),
+        borderRadius: BorderRadius.circular(12)),
     padding: const EdgeInsets.all(16),
-    child: Column(
+    child: DefaultTextStyle.merge(
+      style: const TextStyle(color: Colors.white),
+      child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text('SNDESK by SN INSIGHT',
             style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF1A7FC4))),
+                color: Colors.white)),
         const Text(
                 'One AI core. Multiple enterprise products. From information to action.',
                 style: TextStyle(fontStyle: FontStyle.italic))
@@ -2686,6 +2693,7 @@ Widget _sninsightCompanyCard(TextStyle linkStyle) {
           link('Support', 'https://sninsight.com/Support/RaiseTicket.aspx'),
         ]),
       ],
+    ),
     ),
   ).marginSymmetric(vertical: 8.0);
 }
