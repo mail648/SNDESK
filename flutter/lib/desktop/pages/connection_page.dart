@@ -364,7 +364,9 @@ class _ConnectionPageState extends State<ConnectionPage>
                         fontSize: 18,
                         fontWeight: FontWeight.bold)),
                 SizedBox(height: 2),
-                Text('Fast, secure remote access by SN INSIGHT',
+                Text(
+                    'Fast, secure remote access by SN INSIGHT, '
+                    'a brand of Alicesoft Private Limited',
                     style: TextStyle(color: Colors.white, fontSize: 13)),
               ],
             ),
