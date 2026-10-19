@@ -70,6 +70,46 @@ class _DesktopHomePageState extends State<DesktopHomePage>
     ));
   }
 
+  Widget buildSndeskAccessCard(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Container(
+      margin: const EdgeInsets.fromLTRB(12, 12, 12, 4),
+      padding: const EdgeInsets.only(top: 12, bottom: 4),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF2A2F3A) : Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: const [
+          BoxShadow(
+              color: Color(0x221A7FC4), blurRadius: 12, offset: Offset(0, 4)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                    colors: [Color(0xFF2563EB), Color(0xFF06B6D4)]),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(Icons.screen_share_rounded,
+                  size: 16, color: Colors.white),
+            ),
+            const SizedBox(width: 8),
+            const Expanded(
+              child: Text('Allow remote control',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+            ),
+          ]).marginSymmetric(horizontal: 14),
+          buildIDBoard(context),
+          buildPasswordBoard(context),
+        ],
+      ),
+    );
+  }
+
   Widget buildSninsightLink() {
     return InkWell(
       onTap: () => launchUrl(Uri.parse('https://sninsight.com')),
@@ -104,8 +144,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
       ),
       buildSninsightLink(),
       buildTip(context),
-      if (!isOutgoingOnly) buildIDBoard(context),
-      if (!isOutgoingOnly) buildPasswordBoard(context),
+      if (!isOutgoingOnly) buildSndeskAccessCard(context),
       FutureBuilder<Widget>(
         future: Future.value(
             Obx(() => buildHelpCards(stateGlobal.updateUrl.value))),
@@ -143,7 +182,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
     return ChangeNotifierProvider.value(
       value: gFFI.serverModel,
       child: Container(
-        width: isIncomingOnly ? 280.0 : 200.0,
+        width: isIncomingOnly ? 280.0 : 240.0,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
           gradient: Theme.of(context).brightness == Brightness.light
@@ -261,8 +300,10 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.only(top: 10, bottom: 10),
                         ),
-                        style: TextStyle(
-                          fontSize: 22,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1A7FC4),
                         ),
                       ).workaroundFreezeLinuxMint(),
                     ),
