@@ -2467,6 +2467,16 @@ fn apply_sndesk_branding() {
         keys::OPTION_KEY.to_owned(),
         "x7jYlEJi3grTITdKHXqMEC2EjGHft9I9RH4uZscfQuk=".to_owned(),
     );
+    drop(defaults);
+    config::BUILTIN_SETTINGS
+        .write()
+        .unwrap()
+        .insert(keys::OPTION_HIDE_POWERED_BY_ME.to_owned(), "Y".to_owned());
+    // The free server has no API server, so account login can never succeed.
+    config::HARD_SETTINGS
+        .write()
+        .unwrap()
+        .insert("disable-account".to_owned(), "Y".to_owned());
 }
 
 pub fn load_custom_client() {

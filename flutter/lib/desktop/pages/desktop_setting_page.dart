@@ -2610,8 +2610,9 @@ class _AboutState extends State<_About> {
                     translate('Website'),
                     style: linkStyle,
                   ).marginSymmetric(vertical: 4.0)),
+              _sninsightCompanyCard(linkStyle),
               Container(
-                decoration: const BoxDecoration(color: Color(0xFF2c8cff)),
+                decoration: const BoxDecoration(color: Color(0xFF1A7FC4)),
                 padding:
                     const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
                 child: SelectionArea(
@@ -2643,6 +2644,58 @@ class _AboutState extends State<_About> {
       );
     });
   }
+}
+
+Widget _sninsightCompanyCard(TextStyle linkStyle) {
+  Widget link(String text, String url) => InkWell(
+      onTap: () => launchUrlString(url),
+      child: Text(text, style: linkStyle).marginOnly(right: 16));
+  linkStyle = linkStyle.copyWith(color: Colors.white);
+  return Container(
+    decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF2563EB), Color(0xFF06B6D4), Color(0xFF10B981)],
+        ),
+        borderRadius: BorderRadius.circular(12)),
+    padding: const EdgeInsets.all(16),
+    child: DefaultTextStyle.merge(
+      style: const TextStyle(color: Colors.white),
+      child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('SNDESK by SN INSIGHT',
+            style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white)),
+        const Text(
+                'One AI core. Multiple enterprise products. From information to action.',
+                style: TextStyle(fontStyle: FontStyle.italic))
+            .marginSymmetric(vertical: 6.0),
+        const Text(
+            'SN INSIGHT builds an AI operating platform for business, finance, '
+            'documents and construction. It connects business records, documents '
+            'and workflows so teams can ask questions, check the records behind '
+            'the answers and complete approved actions, with permissions, '
+            'approvals and audit history built in. SNDESK is its secure remote '
+            'desktop app.'),
+        const Text(
+                'Products: Business AI, Design & Build AI, Real Estate AI OS, '
+                'Construction AI ERP, Alice Finance AI, SN Workforce, '
+                'Tally Bridge, Document AI')
+            .marginSymmetric(vertical: 6.0),
+        Wrap(children: [
+          link('sninsight.com', 'https://sninsight.com'),
+          link('About us', 'https://sninsight.com/about'),
+          link('Contact', 'https://sninsight.com/contact'),
+          link('Support', 'https://sninsight.com/Support/RaiseTicket.aspx'),
+        ]),
+      ],
+    ),
+    ),
+  ).marginSymmetric(vertical: 8.0);
 }
 
 //#endregion

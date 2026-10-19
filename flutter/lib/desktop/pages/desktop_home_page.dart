@@ -70,6 +70,19 @@ class _DesktopHomePageState extends State<DesktopHomePage>
     ));
   }
 
+  Widget buildSninsightLink() {
+    return InkWell(
+      onTap: () => launchUrl(Uri.parse('https://sninsight.com')),
+      child: const Text(
+        'sninsight.com',
+        style: TextStyle(
+            color: Color(0xFF1A7FC4),
+            fontSize: 12,
+            decoration: TextDecoration.underline),
+      ),
+    ).marginOnly(top: 4);
+  }
+
   Widget _buildBlock({required Widget child}) {
     return buildRemoteBlock(
         block: _block, mask: true, use: canBeBlocked, child: child);
@@ -89,6 +102,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
         alignment: Alignment.center,
         child: loadLogo(),
       ),
+      buildSninsightLink(),
       buildTip(context),
       if (!isOutgoingOnly) buildIDBoard(context),
       if (!isOutgoingOnly) buildPasswordBoard(context),
@@ -130,7 +144,16 @@ class _DesktopHomePageState extends State<DesktopHomePage>
       value: gFFI.serverModel,
       child: Container(
         width: isIncomingOnly ? 280.0 : 200.0,
-        color: Theme.of(context).colorScheme.background,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
+          gradient: Theme.of(context).brightness == Brightness.light
+              ? const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xFFE3F0FF), Color(0xFFE0F7F2)],
+                )
+              : null,
+        ),
         child: Stack(
           children: [
             Column(
@@ -612,8 +635,9 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
                 colors: [
-                  Color.fromARGB(255, 226, 66, 188),
-                  Color.fromARGB(255, 244, 114, 124),
+                  Color.fromARGB(255, 37, 99, 235),
+                  Color.fromARGB(255, 6, 182, 212),
+                  Color.fromARGB(255, 16, 185, 129),
                 ],
               )),
               padding: EdgeInsets.all(20),
