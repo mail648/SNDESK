@@ -70,17 +70,72 @@ class _DesktopHomePageState extends State<DesktopHomePage>
     ));
   }
 
-  Widget buildSninsightLink() {
-    return InkWell(
-      onTap: () => launchUrl(Uri.parse('https://sninsight.com')),
-      child: const Text(
-        'sninsight.com',
-        style: TextStyle(
-            color: Color(0xFF1A7FC4),
-            fontSize: 12,
-            decoration: TextDecoration.underline),
+  Widget buildSndeskAccessCard(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Container(
+      margin: const EdgeInsets.fromLTRB(12, 12, 12, 4),
+      padding: const EdgeInsets.only(top: 12, bottom: 4),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF2A2F3A) : Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: const [
+          BoxShadow(
+              color: Color(0x221A7FC4), blurRadius: 12, offset: Offset(0, 4)),
+        ],
       ),
-    ).marginOnly(top: 4);
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                    colors: [Color(0xFF2563EB), Color(0xFF06B6D4)]),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(Icons.screen_share_rounded,
+                  size: 16, color: Colors.white),
+            ),
+            const SizedBox(width: 8),
+            const Expanded(
+              child: Text('Allow remote control',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+            ),
+          ]).marginSymmetric(horizontal: 14),
+          buildIDBoard(context),
+          buildPasswordBoard(context),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSninsightLink() {
+    Widget link(String text, String url) => InkWell(
+          onTap: () => launchUrl(Uri.parse(url)),
+          child: Text(
+            text,
+            style: const TextStyle(
+                color: Color(0xFF1A7FC4),
+                fontSize: 12,
+                decoration: TextDecoration.underline),
+          ),
+        );
+    return Column(children: [
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        link('sninsight.com', 'https://sninsight.com'),
+        const Text('  ·  ', style: TextStyle(fontSize: 12)),
+        link('alicesoft.co.in', 'https://alicesoft.co.in'),
+      ]),
+      Text('A product of Alicesoft Private Limited',
+          style: TextStyle(
+              fontSize: 11,
+              color: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.color
+                  ?.withOpacity(0.6))),
+    ]).marginOnly(top: 4);
   }
 
   Widget _buildBlock({required Widget child}) {
@@ -104,8 +159,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
       ),
       buildSninsightLink(),
       buildTip(context),
-      if (!isOutgoingOnly) buildIDBoard(context),
-      if (!isOutgoingOnly) buildPasswordBoard(context),
+      if (!isOutgoingOnly) buildSndeskAccessCard(context),
       FutureBuilder<Widget>(
         future: Future.value(
             Obx(() => buildHelpCards(stateGlobal.updateUrl.value))),
@@ -143,7 +197,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
     return ChangeNotifierProvider.value(
       value: gFFI.serverModel,
       child: Container(
-        width: isIncomingOnly ? 280.0 : 200.0,
+        width: isIncomingOnly ? 280.0 : 240.0,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
           gradient: Theme.of(context).brightness == Brightness.light
@@ -261,8 +315,10 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.only(top: 10, bottom: 10),
                         ),
-                        style: TextStyle(
-                          fontSize: 22,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1A7FC4),
                         ),
                       ).workaroundFreezeLinuxMint(),
                     ),
@@ -628,9 +684,16 @@ class _DesktopHomePageState extends State<DesktopHomePage>
       children: [
         Container(
           margin: EdgeInsets.fromLTRB(
-              0, marginTop, 0, bind.isIncomingOnly() ? marginTop : 0),
+              12, marginTop, 12, bind.isIncomingOnly() ? marginTop : 0),
           child: Container(
               decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color(0x331A7FC4),
+                        blurRadius: 12,
+                        offset: Offset(0, 4)),
+                  ],
                   gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
@@ -640,7 +703,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                   Color.fromARGB(255, 16, 185, 129),
                 ],
               )),
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(14),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -661,11 +724,11 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                           Text(
                             translate(content),
                             style: TextStyle(
-                                height: 1.5,
+                                height: 1.4,
                                 color: Colors.white,
                                 fontWeight: FontWeight.normal,
-                                fontSize: 13),
-                          ).marginOnly(bottom: 20)
+                                fontSize: 12),
+                          ).marginOnly(bottom: 12)
                       ] +
                       (btnText.isNotEmpty
                           ? <Widget>[
@@ -673,14 +736,14 @@ class _DesktopHomePageState extends State<DesktopHomePage>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     FixedWidthButton(
-                                      width: 150,
-                                      padding: 8,
+                                      width: 130,
+                                      padding: 6,
                                       isOutline: true,
                                       text: translate(btnText),
                                       textColor: Colors.white,
                                       borderColor: Colors.white,
-                                      textSize: 20,
-                                      radius: 10,
+                                      textSize: 15,
+                                      radius: 8,
                                       onTap: onPressed,
                                     )
                                   ])
