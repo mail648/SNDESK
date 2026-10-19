@@ -2456,9 +2456,7 @@ pub fn rustdesk_interval(i: Interval) -> ThrottledInterval {
 
 fn apply_sndesk_branding() {
     *config::APP_NAME.write().unwrap() = "SNDESK".to_owned();
-    let server = option_env!("RENDEZVOUS_SERVER")
-        .filter(|s| !s.is_empty())
-        .unwrap_or("125.253.92.98");
+    let server = "202.66.174.78";
     let mut defaults = config::DEFAULT_SETTINGS.write().unwrap();
     defaults.insert(
         keys::OPTION_CUSTOM_RENDEZVOUS_SERVER.to_owned(),
@@ -2467,7 +2465,7 @@ fn apply_sndesk_branding() {
     defaults.insert(keys::OPTION_RELAY_SERVER.to_owned(), server.to_owned());
     defaults.insert(
         keys::OPTION_KEY.to_owned(),
-        "PJRFHPG7rx6Ca4wGQPo8FpEWEDwtwLKZRzpN9yTiqzw=".to_owned(),
+        "x7jYlEJi3grTITdKHXqMEC2EjGHft9I9RH4uZscfQuk=".to_owned(),
     );
 }
 
